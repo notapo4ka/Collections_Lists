@@ -54,7 +54,7 @@ public class Main {
         nums.add("course");
         nums.add("course");
         nums.add("homework");
-        Methods.calcOccurance(nums);
+        System.out.println(Methods.calcOccurance(nums));
 
         System.out.println();
 

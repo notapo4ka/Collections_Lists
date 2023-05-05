@@ -5,12 +5,12 @@ import java.util.List;
 public class Methods {
 
     public static int countOccurance(List<String> list, String target) {
-        if (list.size() < 1) {
-            throw new ListSizeException("The [list] should not be so small, it should contain at least ten elements");
+        if (list.isEmpty()) {
+            throw new IllegalArgumentException("The [list] should not be so small, it should contain at least ten elements");
         }
 
-        if (target.length() < 1) {
-            throw new NullPointerException("Parameter [target] must not be null");
+        if (target == null) {
+            throw new IllegalArgumentException("Parameter [target] must not be null");
         }
 
         int count = 0;
@@ -24,8 +24,8 @@ public class Methods {
     }
 
     public static List toList(int[] target) {
-        if (target.length < 1) {
-            throw new NullPointerException("Parameter [target] must not be null");
+        if (target == null) {
+            throw new IllegalArgumentException("Parameter [target] must not be null");
         }
 
         List<Integer> numbers = new ArrayList<>();
@@ -37,8 +37,8 @@ public class Methods {
     }
 
     public static List findUnique(List<Integer> target) {
-        if (target.size() < 1) {
-            throw new ListSizeException("The [target] parameter should not be null size");
+        if (target == null) {
+            throw new IllegalArgumentException("The [target] parameter should not be null size");
         }
 
         List<Integer> numbers = new ArrayList<>();
@@ -51,34 +51,36 @@ public class Methods {
         return numbers;
     }
 
-    public static void calcOccurance(List<String> target) {
-        if (target.size() < 1) {
-            throw new ListSizeException("The [target] parameter should not be null size");
+    public static String calcOccurance(List<String> target) {
+        if (target == null) {
+            throw new IllegalArgumentException("The [target] parameter should not be null size");
         }
 
-        List<String> temp = new ArrayList<>();
+        List<String> result = new ArrayList<>();
+        int count = 0;
+        String temp = "";
 
         for (int i = 0; i < target.size(); i++) {
-            int count = Collections.frequency(target, target.get(i));
-            if (!temp.contains(target.get(i))) {
-                temp.add(target.get(i));
-                System.out.println(target.get(i) + " трапляється - " + count + " рази/разів");
+            count = Collections.frequency(target, target.get(i));
+            if (!result.contains(target.get(i))) {
+                result.add(target.get(i));
+                temp = target.get(i) + ": " + count;
             }
+            return temp;
         }
+        return null;
     }
 
     public static String findOccurance(List<String> target) {
-        if (target.size() < 1) {
-            throw new ListSizeException("The [target] parameter should not be null size");
+        if (target == null) {
+            throw new IllegalArgumentException("The [target] parameter should not be null size");
         }
 
-        List<String> temp = new ArrayList<>();
         List<Word> words = new ArrayList<>();
 
         for (int i = 0; i < target.size(); i++) {
             int count = Collections.frequency(target, target.get(i));
-            if (!temp.contains(target.get(i))) {
-                temp.add(target.get(i));
+            if (!words.contains(target.get(i))) {
                 words.add(new Word(target.get(i), count));
             }
         }
